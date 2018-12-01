@@ -190,27 +190,27 @@ var renderResponse = function () {
 
 	// Loop through each square in the currentState and find the first avalible square
 
-	var foundResponse = false;
-	var selected = '';
+	var selected = -1;
 	currentState.forEach(function (square, id) {
 
-		// Variables
-		foundResponse = square === "";
+
+		selected = selected < 0 && !square ? id : selected;
 		
 	});
 
-	// Update state
-	currentState[selected] = turn;
+	if (selected >= 0) {
+		// Update state
+		currentState[selected] = turn;
 
-	// Add a historical state
-	historyState.push(currentState.slice());
+		// Add a historical state
+		historyState.push(currentState.slice());
 
-	// Render with new state
-	updateBoard();
+		// Render with new state
+		updateBoard();
 
-	// Update turn
-	turn = turn === 'X' ? 'O' : 'X';
-
+		// Update turn
+		turn = turn === 'X' ? 'O' : 'X';
+	}
 };
 
 /**
@@ -237,6 +237,7 @@ document.addEventListener('click', function (event) {
 	// If a .game-square was clicked
 	if (event.target.matches('.game-square') && !event.target.hasAttribute('disabled')) {
 		renderTurn(event.target);
+		renderResponse();
 	}
 
 	// If #play-again was clicked
