@@ -5,6 +5,12 @@
 		},
 		{
 			"path": "CSS"
+		},
+		{
+			"path": "Tic-Tac-Toe"
+		},
+		{
+			"path": "JavaScript"
 		}
 	],
 	"settings": {}
